@@ -1,0 +1,4 @@
+Thu Jan 08 19:17:28 EST 2015|null
+Thu Jan 08 19:17:28 EST 2015|SELECT * FROM account;
+Thu Jan 08 19:18:50 EST 2015|null
+Thu Jan 08 19:18:50 EST 2015|SELECT * FROM account;
