@@ -85,6 +85,7 @@ public class LoginUI {
 						"Thanks for coming, see you next time!");
 				frame.dispatchEvent(new WindowEvent(frame,
 						WindowEvent.WINDOW_CLOSING));
+				 
 
 			}
 		});

@@ -206,5 +206,27 @@ public class MySqlUtilities implements DbUtilities {
 		}
 		return new DefaultTableModel(data, columnNames);
 	}
+	public void closeDbConnection(){
+
+		if(conn != null){ // Check if connection object already exists
+
+			try {
+
+				conn.close();
+
+			} catch (SQLException e) {
+
+				// TODO Auto-generated catch block
+
+				e.printStackTrace();
+
+			}
+
+		}
+
+
+	}
+
+
 
 }

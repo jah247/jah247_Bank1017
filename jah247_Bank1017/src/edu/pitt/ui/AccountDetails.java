@@ -19,7 +19,7 @@ import edu.pitt.utilities.MySqlUtilities;
 import edu.pitt.utilities.ErrorLogger;
 
 public class AccountDetails {
-
+	private DbUtilities db;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField txtXxxWelcomeTo;
@@ -56,20 +56,10 @@ public class AccountDetails {
 	 */
 	private void initialize() {
 
-		class SetTimer implements ActionListener {
-			public void actionPerformed(ActionEvent event) {
-				JOptionPane.showMessageDialog(null,
-						"Time Out! You have to log-in again!");
-				frame.dispatchEvent(new WindowEvent(frame,
-						WindowEvent.WINDOW_CLOSING));
-			}
-		}
-		SetTimer st = new SetTimer();
-		time = new Timer(60 * 1000, st);
-		time.start();
+
 		String sql = "SELECT * FROM customer JOIN customer_account ON customerId = fk_customerId JOIN account ON fk_accountId = accountId WHERE customerId = '"
 				+ accountOwner.getCustomerID() + "';";
-		DbUtilities db = new MySqlUtilities();
+		db = new MySqlUtilities();
 		try {
 			ResultSet rs = db.getResultSet(sql);
 			while (rs.next()) {
@@ -85,6 +75,18 @@ public class AccountDetails {
 			accountList.add(new Account(item));
 		}
 		// System.out.println(accountOwner.getCustomerID());
+		class SetTimer implements ActionListener {
+			public void actionPerformed(ActionEvent event) {
+				JOptionPane.showMessageDialog(null,
+						"Time Out! You have to log-in again!");
+				frame.dispatchEvent(new WindowEvent(frame,
+						WindowEvent.WINDOW_CLOSING));
+				db.closeDbConnection();
+			}
+		}
+		SetTimer st = new SetTimer();
+		time = new Timer(60 * 1000, st);
+		time.start();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 520, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -159,6 +161,7 @@ public class AccountDetails {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispatchEvent(new WindowEvent(frame,
 						WindowEvent.WINDOW_CLOSING));
+				db.closeDbConnection();
 			}
 
 		});
@@ -197,7 +200,6 @@ public class AccountDetails {
 			interestRate = selectedAccount.getInterestRate();
 			penalty = selectedAccount.getPanelty();
 			status = selectedAccount.getStatus();
-			System.out.println(balance + " " + status + " " + type);
 			lblAccountType.setText(("Account type: " + type));
 			lblBalance.setText("Balance: " + balance);
 			lblInterestRate.setText("Interest Rate: " + interestRate);

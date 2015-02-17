@@ -50,4 +50,6 @@ public interface DbUtilities {
 	 */
 	public DefaultTableModel getDataTable(String sqlQuery,
 			String[] customColumnNames) throws SQLException;
+
+	public void closeDbConnection();
 }

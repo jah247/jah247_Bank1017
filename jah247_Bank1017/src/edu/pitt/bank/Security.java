@@ -25,7 +25,6 @@ public class Security {
 		Customer customer = null;
 		String sql = "SELECT * FROM customer WHERE loginName = '" + loginName
 				+ "' AND pin = '" + pin + "';";
-		System.out.println(sql);
 		DbUtilities db = new MySqlUtilities();
 		try {
 

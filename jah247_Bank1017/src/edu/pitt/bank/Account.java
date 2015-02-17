@@ -130,7 +130,6 @@ public class Account {
 	 */
 	public void withdraw(double amount) {
 		this.balance = this.balance - amount;
-		System.out.println(balance);
 		createTransaction(this.accountID, this.type, amount, this.balance);
 		updateDatabaseAccountBalance();
 	}
